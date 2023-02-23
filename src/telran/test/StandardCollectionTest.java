@@ -28,6 +28,7 @@ class StandardCollectionTest {
 		
 	}
 	@Test
+	@Disabled
 	void displayOccurrencesCount() {
 		String [] strings = {"lmn", "abc", "abc", "lmn", "a", "lmn"};
 		Arrays.stream(strings)
@@ -38,10 +39,42 @@ class StandardCollectionTest {
 		
 	}
 	@Test
+	@Disabled
 	void displayDigitStatistics() {
 		//Generate 1000000 random numbers [1-Integer.MAX_VALUE)
 		//Display digits and counts of their occurrences in descending order of the counts
 		//consider using flatMap for getting many from one
+		new Random().ints(1_000_000, 1, Integer.MAX_VALUE)
+		.flatMap(n -> Integer.toString(n).chars()).boxed()
+		.collect(Collectors.groupingBy(digit -> digit, Collectors.counting()))
+		.entrySet().stream().sorted((e1, e2) -> Long.compare(e2.getValue(), e1.getValue()))
+		.forEach(e -> System.out.printf("%d: %d\n",   e.getKey() - '0', e.getValue()));
+		;
+	}
+	@Test
+	void maxNumberWithNegativeImageTest() {
+		int ar[] = {10000000, 3, -2, -200, 200, -3, 2};
+		int ar1[] = {1000000, -1000000000, 3, -4};
+		assertEquals(200, maxNumberWithNegativeImage(ar));
+		assertEquals(-1, maxNumberWithNegativeImage(ar1));
+		
+		
+	}
+	int maxNumberWithNegativeImage(int array[]) {
+		//TODO
+		//return maximal positive number having it negative image or -1 if none such numbers
+		return -1;
+	}
+	void treeIteratingTest() {
+		int array[] = {1, 11, 111, 32, 9, 1234, 99, 992};
+		createAndIterateTreeInOrder(array);
+	}
+
+	private void createAndIterateTreeInOrder(int[] array) {
+		// TODO 
+		//create tree, add in tree numbers from a given array
+		//and iterate in the order of array defined in 69
+		
 	}
 	
 
