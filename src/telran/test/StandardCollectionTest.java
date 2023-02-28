@@ -53,7 +53,7 @@ class StandardCollectionTest {
 	}
 	@Test
 	void maxNumberWithNegativeImageTest() {
-		int ar[] = {10000000, 3, -2, -200, 200, -3, 2};
+		int ar[] = {10000000, 3, -2, 200, -200, -3, 2};
 		int ar1[] = {1000000, -1000000000, 3, -4};
 		assertEquals(200, maxNumberWithNegativeImage(ar));
 		assertEquals(-1, maxNumberWithNegativeImage(ar1));
@@ -61,20 +61,45 @@ class StandardCollectionTest {
 		
 	}
 	int maxNumberWithNegativeImage(int array[]) {
-		//TODO
-		//return maximal positive number having it negative image or -1 if none such numbers
-		return -1;
+		int maxValue = -1;
+		int candidate = -1;
+		HashSet<Integer> helper = new HashSet<>();
+		for(int num: array) {
+			if (helper.contains(-num)) {
+				int absNum = Math.abs(num);
+				if(absNum > maxValue) {
+					maxValue = absNum;
+				}
+			}
+			helper.add(num);
+			
+			
+		}
+		return maxValue;
 	}
+	@Test
 	void treeIteratingTest() {
-		int array[] = {1, 11, 111, 32, 9, 1234, 99, 992};
+		Integer array[] = {1, 11, 111, 32, 9, 1234, 99, 992};
 		createAndIterateTreeInOrder(array);
 	}
 
-	private void createAndIterateTreeInOrder(int[] array) {
+	private void createAndIterateTreeInOrder(Integer[] array) {
 		// TODO 
 		//create tree, add in tree numbers from a given array
 		//and iterate in the order of array defined in 69
+		TreeSet<Integer> set = new TreeSet<>((num1, num2) ->
+		Integer.compare(getSumDigits(num1), getSumDigits(num2)));
+		for(int num: array) {
+			set.add(num);
+		}
+		assertArrayEquals(array, set.toArray(new Integer[0]));
 		
+		
+	}
+
+	private int getSumDigits(Integer num1) {
+		
+		return num1.toString().chars().map(c -> c - '0').sum();
 	}
 	
 
