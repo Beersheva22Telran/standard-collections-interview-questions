@@ -33,7 +33,7 @@ public class ConnectionsPoolImpl implements ConnectionsPool{
 			}
 			
 		}
-		public void removeNode(Node nodeConnection) {
+		 void removeNode(Node nodeConnection) {
 			if (nodeConnection == tail) {
 				removeTail();
 			} else {
